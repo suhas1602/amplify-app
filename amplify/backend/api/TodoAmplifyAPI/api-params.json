@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "TodoAmplifyLambda",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "TodoAmplifyAPI",
+    "apiName": "TodoAmplifyAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "TodoAmplifyLambda"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "todoamplifyapp-dev-20190721105636-authRole",
+        "unAuthRoleName": "todoamplifyapp-dev-20190721105636-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "TodoAmplifyLambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
