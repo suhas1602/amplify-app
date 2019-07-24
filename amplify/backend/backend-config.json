@@ -37,5 +37,11 @@
 				}
 			]
 		}
+	},
+	"auth": {
+		"todoamplifyapp1d85d5cf": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }

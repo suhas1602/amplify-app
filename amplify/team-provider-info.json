@@ -9,6 +9,11 @@
             "UnauthRoleName": "todoamplifyapp-dev-20190721105636-unauthRole",
             "StackName": "todoamplifyapp-dev-20190721105636",
             "StackId": "arn:aws:cloudformation:us-east-1:390089750816:stack/todoamplifyapp-dev-20190721105636/bcc80ee0-abc7-11e9-b3ff-12545315cab6"
+        },
+        "categories": {
+            "auth": {
+                "todoamplifyapp1d85d5cf": {}
+            }
         }
     }
 }

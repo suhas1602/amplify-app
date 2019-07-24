@@ -7,23 +7,28 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text } from "react-native";
 import {
-  Card,
   WingBlank,
   WhiteSpace,
   Button,
-  Icon,
   Provider,
 } from "@ant-design/react-native";
-import Amplify, { API } from "aws-amplify";
+import { withAuthenticator } from "aws-amplify-react-native";
+import { AmplifyTheme } from "aws-amplify-react-native";
+import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
 import uuid from "uuid";
-import { getItems, createItem, deleteItem } from "./utils/api";
+import { getItems, createItem, deleteItem, getItem } from "./utils/api";
 import CreateModal from "./components/CreateModal";
 import ItemList from "./components/ItemList";
 
 Amplify.configure(awsconfig);
+
+const MyButton = Object.assign({}, AmplifyTheme.button, {
+  backgroundColor: "#1890ff"
+});
+const MyTheme = Object.assign({}, AmplifyTheme, { button: MyButton });
 
 const App = () => {
   const [items, setItems] = useState();
@@ -34,6 +39,7 @@ const App = () => {
 
   useEffect(() => {
     getItems().then(response => {
+      console.log(response.data);
       setItems(response.data);
     });
   }, []);
@@ -63,7 +69,7 @@ const App = () => {
         setItems(data);
       })
       .catch(error => console.log(error));
-  }
+  };
 
   const CreateModalProps = {
     visible,
@@ -80,10 +86,10 @@ const App = () => {
   const ItemListProps = {
     items,
     handleDelete
-  }
+  };
 
   return (
-    <>
+    <Provider>
       <View style={{ flex: 5, paddingTop: 32, backgroundColor: "#f5f5f5" }}>
         <WingBlank>
           <WhiteSpace size="lg" />
@@ -102,12 +108,11 @@ const App = () => {
         </WingBlank>
       </View>
       <CreateModal {...CreateModalProps} />
-    </>
+    </Provider>
   );
 };
 
-export default () => (
-  <Provider>
-    <App />
-  </Provider>
-);
+export default withAuthenticator(App, {
+  includeGreetings: true,
+  theme: { MyTheme }
+});

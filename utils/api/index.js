@@ -1,13 +1,20 @@
 import { API } from "aws-amplify";
 
-export const getItems = async () => {
+export const getItems = () => {
   const apiName = "TodoAmplifyAPI";
   const path = "/items";
 
-  return await API.get(apiName, path, {});
+  return API.get(apiName, path, {});
 };
 
-export const createItem = async item => {
+export const getItem = (id) => {
+  const apiName = "TodoAmplifyAPI";
+  const path = `/items/object/${id}`;
+
+  return API.get(apiName, path, {});
+}
+
+export const createItem = item => {
   const apiName = "TodoAmplifyAPI";
   const path = "/items";
   const init = {
@@ -16,12 +23,12 @@ export const createItem = async item => {
     },
   };
 
-  return await API.put(apiName, path, init);
+  return API.put(apiName, path, init);
 };
 
-export const deleteItem = async id => {
+export const deleteItem = id => {
   const apiName = "TodoAmplifyAPI";
   const path = `/items/object/${id}`;
 
-  return await API.del(apiName, path, {});
+  return API.del(apiName, path, {});
 };
